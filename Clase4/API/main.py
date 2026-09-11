@@ -8,7 +8,7 @@ import Clase4.API.esquema
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-NOMBRE_BUNDLE = "Clase4/API/modelo_demanda.joblib"
+NOMBRE_BUNDLE = "modelo_demanda.joblib"
 
 estado_servicio = {"bundle": None}
 
