@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import Clase4.API.features
+import features
 
 def pronosticar(bundle, historial, horizonte=14):
     """
@@ -30,7 +30,7 @@ def pronosticar(bundle, historial, horizonte=14):
             [h, pd.DataFrame([{"date": siguiente, "store": store, "item": item, "sales": np.nan}])],
             ignore_index=True,
         )
-        fila = Clase4.API.features.crear_features(h).iloc[[-1]]
+        fila = features.crear_features(h).iloc[[-1]]
         pred = max(0.0, float(modelo.predict(fila[columnas])[0]))
         h.loc[h.index[-1], "sales"] = pred          # se realimenta como si fuera dato real
         resultado.append({"fecha": siguiente.date().isoformat(), "prediccion": round(pred, 2)})

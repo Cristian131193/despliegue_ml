@@ -3,8 +3,8 @@ from typing import Literal
 
 import joblib
 import pandas as pd
-import Clase4.API.inferencia
-import Clase4.API.esquema
+import inferencia
+import esquema
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
@@ -38,7 +38,7 @@ async def estado():
 
 @app.post("/predecir", summary="Pronosticar demanda", description="Recibe un historial de ventas y devuelve " \
                                                         "las predicciones para los próximos días.")
-def predecir(datos: Clase4.API.esquema.SolicitudPronostico):
+def predecir(datos: esquema.SolicitudPronostico):
 
     store = datos.store
     item = datos.item
@@ -58,7 +58,7 @@ def predecir(datos: Clase4.API.esquema.SolicitudPronostico):
 
     bundle = estado_servicio["bundle"]
 
-    pronostico = Clase4.API.inferencia.pronosticar(bundle, historial, horizonte)
+    pronostico = inferencia.pronosticar(bundle, historial, horizonte)
 
     return {"store": store, "item": item, "pronostico": pronostico}
 
